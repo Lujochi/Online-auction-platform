@@ -1,2 +1,18 @@
-# Online-auction-platform
-A Plataforma de Leilões Online é um sistema onde usuários podem cadastrar produtos para leilão e dar lances em tempo real. Com uma interface dinâmica e notificações instantâneas, o projeto utiliza Next.js, NestJS e WebSockets para garantir uma experiência fluida e interativa.
+# 🏆 Plataforma de Leilões Online
+Uma plataforma de leilões em tempo real onde usuários podem criar, gerenciar e participar de leilões, dando lances ao vivo.
+
+## 🚀 Tecnologias
+- Front-end: Next.js (React), TailwindCSS
+- Back-end: NestJS (Node.js), WebSockets
+- Banco de Dados: PostgreSQL (Prisma ORM)
+- Autenticação: JWT + OAuth (Google, Facebook)
+- Extras: Redis para cache, Stripe para pagamentos
+## 🎯 Funcionalidades
+✅ Cadastro e login de usuários <br>
+✅ Criação de leilões com título, descrição, imagens e preço inicial <br>
+✅ Contagem regressiva do leilão em tempo real <br>
+✅ Sistema de lances ao vivo usando WebSockets <br>
+✅ Notificações para os participantes quando um novo lance é dado <br>
+✅ Histórico de leilões finalizados <br>
+✅ Painel do usuário para gerenciar leilões criados e lances feitos <br>
+✅ Sistema de pagamento seguro via Stripe
