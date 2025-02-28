@@ -1,0 +1,21 @@
+{
+  "name": "online-auction-platform",
+  "version": "1.0.0",
+  "description": "Uma plataforma de leilões em tempo real onde usuários podem criar, gerenciar e participar de leilões, dando lances ao vivo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lujochi/Online-auction-platform.git"
+  },
+  "keywords": [],
+  "author": "Luan Jose Chiodini",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Lujochi/Online-auction-platform/issues"
+  },
+  "homepage": "https://github.com/Lujochi/Online-auction-platform#readme"
+}
