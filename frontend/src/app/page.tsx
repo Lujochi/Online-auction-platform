@@ -42,6 +42,11 @@ const Loading = () => {
       </div>
 
       <p className="mt-6 text-2xl font-bold uppercase">Carregando...</p>
+      <footer className="absolute bottom-0 w-full flex justify-center items-center h-14 bg-primary-900">
+        <span className="text-[13px] text-primary-200">
+          &copy; Luan Jose Chiodini 2025
+        </span>
+      </footer>
     </div>
   );
 };
