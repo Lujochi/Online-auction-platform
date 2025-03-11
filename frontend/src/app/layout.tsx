@@ -11,3 +11,10 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const metadata = {
+  title: "Plataforma de leilão online",
+  description:
+    "Navegue e dê lances em uma variedade de itens no conforto de sua casa.",
+  favicon: "/favicon.ico",
+};
