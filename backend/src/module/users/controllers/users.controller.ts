@@ -20,4 +20,11 @@ export class UsersController {
   async createUser(@Body() data: User): Promise<User> {
     return this.usersService.createUser(data);
   }
+
+  @Post("login")
+  async login(
+    @Body() data: { email: string; password_hash: string },
+  ): Promise<{ user: User; token: string }> {
+    return await this.usersService.login(data.email, data.password_hash);
+  }
 }

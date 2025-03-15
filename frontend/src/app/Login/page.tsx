@@ -1,9 +1,29 @@
+"use client";
 import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
+  const { register, handleSubmit } = useForm();
+  const { signIn } = useContext(AuthContext);
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSignIn = async (data) => {
+    try {
+      await signIn(data);
+    } catch (error) {
+      setErrorMessage("Falha ao fazer login. Verifique suas credenciais.");
+    }
+  };
   return (
     <div className="w-screen h-screen bg-primary-800 flex flex-col text-white justify-center items-center">
-      <form action="#" className="w-md rounded-xl m-auto bg-white-t10">
+      {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+      <form
+        className="w-md rounded-xl m-auto bg-white-t10"
+        onSubmit={handleSubmit(handleSignIn)}
+      >
         <div className="flex flex-col justify-center items-center">
           <Image
             className="mt-8"
@@ -14,6 +34,7 @@ const LoginPage = () => {
           />
           <p className="mt-6 text-3xl font-bold uppercase">Login</p>
           <input
+            {...register("email")}
             type="email"
             name="email"
             id="email"
@@ -21,6 +42,7 @@ const LoginPage = () => {
             className="w-80 pr-4 pl-4 pt-3 pb-3 bg-white rounded-lg mt-7 text-primary-800 font-medium"
           />
           <input
+            {...register("password")}
             type="password"
             name="password"
             id="password"
