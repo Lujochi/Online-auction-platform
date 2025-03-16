@@ -53,6 +53,7 @@ export class UsersService {
     email: string,
     password_hash: string,
   ): Promise<{ user: User; token: string }> {
+    console.log(email, password_hash);
     const user = await this.prisma.user.findUnique({
       where: { email },
     });

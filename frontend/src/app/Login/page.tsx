@@ -5,15 +5,17 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
   const { signIn } = useContext(AuthContext);
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSignIn = async (data) => {
+  const handleSignIn = async (data: { email: string; password: string }) => {
+    console.log(data);
     try {
       await signIn(data);
     } catch (error) {
+      console.error(error);
       setErrorMessage("Falha ao fazer login. Verifique suas credenciais.");
     }
   };

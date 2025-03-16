@@ -21,11 +21,8 @@ interface AuthContextData {
 }
 
 interface SignInData {
-  User: {
-    email: string;
-    password_hash: string;
-  };
-  token: string;
+  email: string;
+  password: string;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -37,14 +34,14 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const router = useRouter();
 
   async function signIn(data: SignInData) {
-    const response = await fetch("http://localhost:4000/login", {
+    const response = await fetch("http://localhost:4000/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: data.User.email,
-        password_hash: data.User.password_hash,
+        email: data.email,
+        password_hash: data.password,
       }),
     });
 
