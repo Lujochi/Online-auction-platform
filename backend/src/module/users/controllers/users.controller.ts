@@ -17,7 +17,15 @@ export class UsersController {
   }
 
   @Post("register")
-  async createUser(@Body() data: User): Promise<User> {
+  async createUser(
+    @Body()
+    data: {
+      first_name: string;
+      last_name: string;
+      email: string;
+      password: string;
+    },
+  ): Promise<User> {
     return this.usersService.createUser(data);
   }
 
