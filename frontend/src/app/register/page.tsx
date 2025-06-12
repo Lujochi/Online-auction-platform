@@ -1,9 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const RegisterPage = () => {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -31,9 +34,7 @@ const RegisterPage = () => {
         return;
       }
 
-      const result = await res.json();
-      alert("Usuário registrado com sucesso!");
-      console.log(result);
+      router.push("/home");
     } catch (err) {
       console.error("Erro ao registrar:", err);
       alert("Erro ao registrar. Veja o console.");
