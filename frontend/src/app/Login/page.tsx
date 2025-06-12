@@ -5,7 +5,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm<{ email: string; password: string }>();
+  const { register, handleSubmit } = useForm<{
+    email: string;
+    password: string;
+  }>();
   const { signIn } = useContext(AuthContext);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -57,7 +60,7 @@ const LoginPage = () => {
                 type="checkbox"
                 name="remember"
                 id="remember"
-                className="w-4 h-4"
+                className="w-4 h-4 cursor-pointer"
               />
               <span>Lembre-me</span>
             </div>
@@ -70,14 +73,14 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="mt-12 w-80 p-3.5 bg-secundary-600 text-primary-800 rounded-lg font-medium text-[20px]"
+            className="mt-12 w-80 p-3.5 bg-secundary-600 text-primary-800 rounded-lg font-medium text-[20px] cursor-pointer"
           >
             Entrar
           </button>
           <span className="text-[12px] mt-5">Ou</span>
           <button
             type="submit"
-            className="mt-5 w-80 p-3 bg-white rounded-lg text-primary-800"
+            className="mt-5 w-80 p-3 bg-white rounded-lg text-primary-800 cursor-pointer"
           >
             Entrar com google
           </button>

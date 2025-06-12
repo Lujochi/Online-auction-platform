@@ -1,8 +1,52 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+
 const RegisterPage = () => {
+  const router = useRouter();
+
+  const [formData, setFormData] = useState({
+    first_name: "",
+    last_name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:4000/users/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        alert("Erro: " + error.message);
+        return;
+      }
+
+      router.push("/home");
+    } catch (err) {
+      console.error("Erro ao registrar:", err);
+      alert("Erro ao registrar. Veja o console.");
+    }
+  };
+
   return (
     <div className="w-screen h-screen bg-primary-800 flex flex-col text-white justify-center items-center">
-      <form action="#" className="w-md rounded-xl m-auto bg-white-t10">
+      <form
+        onSubmit={handleSubmit}
+        className="w-md rounded-xl m-auto bg-white-t10"
+      >
         <div className="flex flex-col justify-center items-center">
           <Image
             className="mt-8"
@@ -15,50 +59,59 @@ const RegisterPage = () => {
 
           <input
             type="text"
-            name="name"
-            id="name"
+            name="first_name"
             placeholder="Nome"
+            value={formData.first_name}
+            onChange={handleChange}
+            required
             className="w-80 pr-4 pl-4 pt-3 pb-3 bg-white rounded-lg mt-7 text-primary-800 font-medium"
-          ></input>
+          />
           <input
             type="text"
-            name="lastname"
-            id="lastname"
+            name="last_name"
             placeholder="Sobrenome"
+            value={formData.last_name}
+            onChange={handleChange}
+            required
             className="w-80 pr-4 pl-4 pt-3 pb-3 bg-white rounded-lg mt-5 text-primary-800 font-medium"
-          ></input>
+          />
           <input
             type="email"
             name="email"
-            id="email"
             placeholder="E-mail"
+            value={formData.email}
+            onChange={handleChange}
+            required
             className="w-80 pr-4 pl-4 pt-3 pb-3 bg-white rounded-lg mt-5 text-primary-800 font-medium"
-          ></input>
+          />
           <input
             type="password"
             name="password"
-            id="password"
             placeholder="Senha"
+            value={formData.password}
+            onChange={handleChange}
+            required
             className="w-80 pr-4 pl-4 pt-3 pb-3 bg-white rounded-lg mt-5 text-primary-800 font-medium"
-          ></input>
+          />
           <button
             type="submit"
-            className="mt-12 w-80 p-3.5 bg-secundary-600 text-primary-800 rounded-lg font-medium text-[20px]"
+            className="mt-12 w-80 p-3.5 bg-secundary-600 text-primary-800 rounded-lg font-medium text-[20px] cursor-pointer"
           >
             Registrar
           </button>
+
           <span className="text-[12px] mt-5">Ou</span>
           <button
-            type="submit"
-            className="mt-5 w-80 p-3 bg-white rounded-lg text-primary-800"
+            type="button"
+            className="mt-5 w-80 p-3 bg-white rounded-lg text-primary-800 cursor-pointer"
           >
-            Entrar com google
+            Entrar com Google
           </button>
           <span className="mt-6 mb-10 text-[13px]">
             Já possui conta?
             <a
               href="/login"
-              className="text-blue-800 hover:underline transition duration-200"
+              className="text-blue-800 hover:underline transition duration-200 ml-1"
             >
               Faça login
             </a>

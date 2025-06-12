@@ -4,7 +4,7 @@ import {
   BadRequestException,
 } from "@nestjs/common";
 import { PrismaService } from "src/database/prisma.service";
-import { User, Prisma } from "@prisma/client";
+import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 
@@ -29,7 +29,12 @@ export class UsersService {
     });
   }
 
-  async createUser(data: Prisma.UserCreateInput): Promise<User> {
+  async createUser(data: {
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+  }): Promise<User> {
     const userExists = await this.prisma.user.findFirst({
       where: { email: data.email },
     });
@@ -38,14 +43,19 @@ export class UsersService {
       throw new BadRequestException("User already exists");
     }
 
-    if (!data.password_hash) {
-      throw new BadRequestException("Password hash is required");
+    if (!data.password) {
+      throw new BadRequestException("Password is required");
     }
 
-    const hashedPassword = await bcrypt.hash(data.password_hash, 10);
+    const hashedPassword = await bcrypt.hash(data.password, 10);
 
     return this.prisma.user.create({
-      data: { ...data, password_hash: hashedPassword },
+      data: {
+        email: data.email,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        password_hash: hashedPassword,
+      },
     });
   }
 
