@@ -4,10 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import { useLogout } from "@/lib/auth/logout";
+
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
+  const logout = useLogout();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -101,7 +104,7 @@ export const Header = () => {
                   },
                   {
                     label: "Sair da conta",
-                    onClick: () => console.log("logout"),
+                    onClick: logout,
                   },
                 ].map((item, index) => (
                   <button

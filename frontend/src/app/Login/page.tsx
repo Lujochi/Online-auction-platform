@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
 
 const LoginPage = () => {
@@ -22,6 +23,7 @@ const LoginPage = () => {
       setErrorMessage("Falha ao fazer login. Verifique suas credenciais.");
     }
   };
+
   return (
     <div className="w-screen h-screen bg-primary-800 flex flex-col text-white justify-center items-center">
       {errorMessage && <p className="text-red-500">{errorMessage}</p>}
