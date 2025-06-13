@@ -1,6 +1,31 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export const Header = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        event.target instanceof Node &&
+        !menuRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <header>
       <div className="flex justify-around items-center h-[100px] bg-primary-800">
@@ -38,7 +63,11 @@ export const Header = () => {
               />
             </button>
           </div>
-          <div className="cursor-pointer">
+          <div
+            className="cursor-pointer relative"
+            onClick={() => setIsOpen(!isOpen)}
+            ref={menuRef}
+          >
             <Image
               className="rounded-full"
               src="/images/default-user.png"
@@ -46,6 +75,45 @@ export const Header = () => {
               width={45}
               height={45}
             />
+
+            {isOpen && (
+              <div className="absolute right-0 mt-2 w-56 bg-gray-800 text-white rounded-md shadow-lg z-50">
+                {[
+                  {
+                    label: "Cadastrar novo Leilão",
+                    onClick: () => router.push("/leiloes/novo"),
+                  },
+                  {
+                    label: "Seus leilões",
+                    onClick: () => router.push("/leiloes"),
+                  },
+                  {
+                    label: "Depositar",
+                    onClick: () => router.push("/carteira/depositar"),
+                  },
+                  {
+                    label: "Sacar",
+                    onClick: () => router.push("/carteira/sacar"),
+                  },
+                  {
+                    label: "Configurações",
+                    onClick: () => router.push("/configuracoes"),
+                  },
+                  {
+                    label: "Sair da conta",
+                    onClick: () => console.log("logout"),
+                  },
+                ].map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={item.onClick}
+                    className="w-full text-center px-4 py-2 hover:bg-primary-200 hover:rounded-lg rounded-lg transition-colors cursor-pointer"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

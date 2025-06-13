@@ -10,7 +10,6 @@ type Auction = {
   endsAt: string;
 };
 
-// Converte "00:30:00" para timestamp futuro baseado no tempo atual
 function parseEndsAtToTimestamp(endsAt: string): number {
   const [h, m, s] = endsAt.split(":").map(Number);
   const now = new Date();
@@ -36,7 +35,7 @@ const mockAuctions: Auction[] = [
     title: 'Quadro de arte "A Rosa"',
     imageUrl: "/images/rosa.png",
     currentBid: 560,
-    endsAt: "00:00:10",
+    endsAt: "00:30:00",
   },
 ];
 
@@ -67,21 +66,18 @@ export const FeaturedAuctionCard = () => {
   }, [endTimes]);
 
   return (
-    <div
-      className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-12 w-fit mx-auto"
-      style={{ backgroundImage: "url('/images/bg.jpg')" }}
-    >
+    <div className="grid grid-cols-1 2xl:grid-cols-3 lg:grid-cols-2 gap-12 w-fit mx-auto">
       {mockAuctions.map((auction) => (
         <div
           key={auction.id}
-          className="w-[450px] bg-white shadow-lg rounded-[10px] overflow-hidden hover:scale-105 transition-transform duration-300"
+          className="w-[400px] bg-secundary-200 rounded-[10px] overflow-hidden"
         >
           <Image
             src={auction.imageUrl}
             alt={auction.title}
             width={300}
             height={400}
-            className="w-full h-[250px] border-8 border-primary-200"
+            className="w-full h-[250px] border-8 border-primary-800"
           />
 
           <div className="p-6">
