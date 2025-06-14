@@ -100,7 +100,7 @@ export const Header = () => {
                   },
                   {
                     label: "Configurações",
-                    onClick: () => router.push("/configuracoes"),
+                    onClick: () => router.push("/config"),
                   },
                   {
                     label: "Sair da conta",
